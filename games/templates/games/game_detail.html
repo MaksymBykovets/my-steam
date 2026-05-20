@@ -11,12 +11,16 @@
 
 <div class="row g-4 align-items-start">
     <div class="col-lg-6">
-        <div class="bg-secondary rounded-4 d-flex align-items-center justify-content-center" style="min-height: 360px;">
-            <div class="text-center">
-                <div class="display-1">🎮</div>
-                <h2 class="fw-bold mt-3">{{ game.title }}</h2>
-            </div>
+        <div class="bg-secondary rounded-4 overflow-hidden d-flex align-items-center justify-content-center" style="min-height: 360px;">
+    {% if game.cover_image %}
+        <img src="{{ game.cover_image.url }}" class="w-100 h-100 object-fit-cover" alt="{{ game.title }}">
+    {% else %}
+        <div class="text-center">
+            <div class="display-1">🎮</div>
+            <h2 class="fw-bold mt-3">{{ game.title }}</h2>
         </div>
+    {% endif %}
+</div>
     </div>
 
     <div class="col-lg-6">

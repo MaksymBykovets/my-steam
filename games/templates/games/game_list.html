@@ -19,12 +19,18 @@
     {% for game in games %}
         <div class="col-md-6 col-lg-3">
             <div class="card bg-black text-light border-secondary h-100 shadow">
-                <div class="ratio ratio-4x3 bg-secondary rounded-top d-flex align-items-center justify-content-center">
-                    <div class="text-center px-3">
-                        <div class="display-5">🎮</div>
-                        <div class="fw-bold mt-2">{{ game.title }}</div>
-                    </div>
-                </div>
+                <div class="ratio ratio-4x3 bg-secondary rounded-top overflow-hidden">
+    {% if game.cover_image %}
+        <img src="{{ game.cover_image.url }}" class="w-100 h-100 object-fit-cover" alt="{{ game.title }}">
+    {% else %}
+        <div class="d-flex align-items-center justify-content-center h-100">
+            <div class="text-center px-3">
+                <div class="display-5">🎮</div>
+                <div class="fw-bold mt-2">{{ game.title }}</div>
+            </div>
+        </div>
+    {% endif %}
+</div>
 
                 <div class="card-body">
                     <span class="badge bg-primary mb-2">{{ game.genre }}</span>
