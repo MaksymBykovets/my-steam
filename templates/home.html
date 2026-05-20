@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Home — My Steam{% endblock %}
+
+{% block content %}
+<section class="text-center py-5">
+    <h1 class="display-3 fw-bold">My Steam</h1>
+    <p class="lead text-secondary mt-3">
+        A Django-based game launcher inspired by Steam.
+    </p>
+
+    <div class="mt-4">
+        <a href="#" class="btn btn-primary btn-lg px-4">Browse Games</a>
+        <a href="#" class="btn btn-outline-light btn-lg px-4 ms-2">My Library</a>
+    </div>
+</section>
+
+<section class="row mt-5 g-4">
+    <div class="col-md-4">
+        <div class="card bg-black text-light border-secondary h-100">
+            <div class="card-body">
+                <h5 class="card-title">Game Catalog</h5>
+                <p class="card-text text-secondary">
+                    Browse games, genres, prices, and detailed game information.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card bg-black text-light border-secondary h-100">
+            <div class="card-body">
+                <h5 class="card-title">Personal Library</h5>
+                <p class="card-text text-secondary">
+                    Add games to your library and manage your personal collection.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card bg-black text-light border-secondary h-100">
+            <div class="card-body">
+                <h5 class="card-title">User Account</h5>
+                <p class="card-text text-secondary">
+                    Register, log in, manage your profile, and customize your experience.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
