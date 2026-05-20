@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ game.title }} — My Steam{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="{% url 'game_list' %}" class="btn btn-outline-light">
+        ← Back to Store
+    </a>
+</div>
+
+<div class="row g-4 align-items-start">
+    <div class="col-lg-6">
+        <div class="bg-secondary rounded-4 d-flex align-items-center justify-content-center" style="min-height: 360px;">
+            <div class="text-center">
+                <div class="display-1">🎮</div>
+                <h2 class="fw-bold mt-3">{{ game.title }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <span class="badge bg-primary mb-3">{{ game.genre }}</span>
+
+        <h1 class="fw-bold">{{ game.title }}</h1>
+
+        <p class="text-secondary mb-2">
+            Developed by {{ game.developer }}
+        </p>
+
+        <p class="fs-4 fw-bold mt-4">
+            ${{ game.price }}
+        </p>
+
+        <p class="text-secondary">
+            Release date: {{ game.release_date }}
+        </p>
+
+        <hr class="border-secondary">
+
+        <h4 class="fw-bold mt-4">About this game</h4>
+
+        <p class="text-secondary fs-5">
+            {{ game.description }}
+        </p>
+
+        <div class="d-flex gap-3 mt-4">
+            <a href="#" class="btn btn-primary btn-lg px-4">Add to Library</a>
+            <a href="#" class="btn btn-outline-light btn-lg px-4">Add to Wishlist</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
