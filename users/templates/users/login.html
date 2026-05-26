@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Login — My Steam{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card bg-black text-light border-secondary shadow">
+            <div class="card-body p-4">
+                <h1 class="h3 fw-bold mb-3">Log In</h1>
+                <p class="text-secondary mb-4">Welcome back. Your library missed you.</p>
+
+                <form method="post">
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        {{ form.username }}
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label">Password</label>
+                        {{ form.password }}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100">Log In</button>
+                </form>
+
+                <p class="text-secondary mt-4 mb-0">
+                    Don't have an account?
+                    <a href="{% url 'register' %}" class="text-decoration-none">Create one</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
