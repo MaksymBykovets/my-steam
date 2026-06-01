@@ -3,50 +3,140 @@
 {% block title %}Home — My Steam{% endblock %}
 
 {% block content %}
-<section class="text-center py-5">
-    <h1 class="display-3 fw-bold">My Steam</h1>
-    <p class="lead text-secondary mt-3">
-        A Django-based game launcher inspired by Steam.
-    </p>
+<section class="home-hero rounded-4 p-4 p-lg-5 mb-5">
+    <div class="row align-items-center g-5">
+        <div class="col-lg-6">
+            <span class="badge bg-primary mb-3">Django Game Launcher</span>
 
-    <div class="mt-4">
-        <a href="{% url 'game_list' %}" class="btn btn-primary btn-lg px-4">Browse Games</a>
-        <a href="{% url 'library' %}" class="btn btn-outline-light btn-lg px-4 ms-2">My Library</a>
+            <h1 class="display-3 fw-bold mb-3">
+                Build your ultimate game library.
+            </h1>
+
+            <p class="lead text-light opacity-75 mb-4">
+                Discover games, explore details, and add your favorite titles to your personal library.
+                A Steam-inspired launcher built with Django and Bootstrap.
+            </p>
+
+            <div class="d-flex flex-wrap gap-3">
+                <a href="{% url 'game_list' %}" class="btn btn-primary btn-lg px-4">
+                    Browse Store
+                </a>
+
+                <a href="{% url 'library' %}" class="btn btn-outline-light btn-lg px-4">
+                    My Library
+                </a>
+            </div>
+
+            <div class="row g-3 mt-4">
+                <div class="col-4">
+                    <div class="home-mini-stat">
+                        <h3 class="fw-bold mb-0">Store</h3>
+                        <small class="text-secondary">Game catalog</small>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="home-mini-stat">
+                        <h3 class="fw-bold mb-0">Library</h3>
+                        <small class="text-secondary">Personal collection</small>
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <div class="home-mini-stat">
+                        <h3 class="fw-bold mb-0">Profile</h3>
+                        <small class="text-secondary">Player account</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="home-showcase">
+                <div class="showcase-topbar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <div class="showcase-content">
+                    <div class="showcase-featured">
+                        <div>
+                            <span class="badge bg-success mb-2">Featured</span>
+                            <h2 class="fw-bold mb-2">My Steam Store</h2>
+                            <p class="text-light opacity-75 mb-4">
+                                Search games, filter genres, view details, and manage your collection.
+                            </p>
+
+                            <a href="{% url 'game_list' %}" class="btn btn-light btn-sm">
+                                Open Store
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="showcase-grid">
+                        <div class="showcase-card">
+                            <div class="showcase-icon">🎮</div>
+                            <p class="mb-0 fw-bold">Games</p>
+                        </div>
+
+                        <div class="showcase-card">
+                            <div class="showcase-icon">📚</div>
+                            <p class="mb-0 fw-bold">Library</p>
+                        </div>
+
+                        <div class="showcase-card">
+                            <div class="showcase-icon">👤</div>
+                            <p class="mb-0 fw-bold">Profile</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<section class="row mt-5 g-4">
+<section class="row g-4 mb-5">
     <div class="col-md-4">
-        <div class="card bg-black text-light border-secondary h-100">
-            <div class="card-body">
-                <h5 class="card-title">Game Catalog</h5>
-                <p class="card-text text-secondary">
-                    Browse games, genres, prices, and detailed game information.
-                </p>
-            </div>
+        <div class="home-feature-card h-100">
+            <div class="feature-icon">🛒</div>
+            <h4 class="fw-bold mt-3">Game Store</h4>
+            <p class="text-secondary mb-0">
+                Browse games, search by title, filter by genre, and sort by price or release date.
+            </p>
         </div>
     </div>
 
     <div class="col-md-4">
-        <div class="card bg-black text-light border-secondary h-100">
-            <div class="card-body">
-                <h5 class="card-title">Personal Library</h5>
-                <p class="card-text text-secondary">
-                    Add games to your library and manage your personal collection.
-                </p>
-            </div>
+        <div class="home-feature-card h-100">
+            <div class="feature-icon">📚</div>
+            <h4 class="fw-bold mt-3">Personal Library</h4>
+            <p class="text-secondary mb-0">
+                Add games to your account, view your personal collection, and remove games anytime.
+            </p>
         </div>
     </div>
 
     <div class="col-md-4">
-        <div class="card bg-black text-light border-secondary h-100">
-            <div class="card-body">
-                <h5 class="card-title">User Account</h5>
-                <p class="card-text text-secondary">
-                    Register, log in, manage your profile, and customize your experience.
-                </p>
-            </div>
+        <div class="home-feature-card h-100">
+            <div class="feature-icon">⚙️</div>
+            <h4 class="fw-bold mt-3">Admin Control</h4>
+            <p class="text-secondary mb-0">
+                Manage games, covers, prices, genres, and users through the Django admin panel.
+            </p>
         </div>
     </div>
+</section>
+
+<section class="home-cta rounded-4 p-4 p-lg-5 text-center">
+    <span class="badge bg-primary mb-3">Ready to play?</span>
+    <h2 class="fw-bold mb-3">Start exploring your game launcher.</h2>
+    <p class="text-secondary mb-4">
+        Open the Store, view game details, and build your library like a true digital collector.
+    </p>
+
+    <a href="{% url 'game_list' %}" class="btn btn-primary btn-lg px-5">
+        Go to Store
+    </a>
 </section>
 {% endblock %}

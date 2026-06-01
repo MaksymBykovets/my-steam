@@ -9,6 +9,145 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
 
+    .home-hero {
+    background:
+        radial-gradient(circle at top left, rgba(13, 110, 253, 0.42), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(139, 92, 246, 0.4), transparent 36%),
+        linear-gradient(135deg, rgba(5, 5, 5, 0.94), rgba(20, 14, 45, 0.92));
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.42);
+    overflow: hidden;
+    position: relative;
+}
+
+.home-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: linear-gradient(to bottom, black, transparent);
+    pointer-events: none;
+}
+
+.home-hero > * {
+    position: relative;
+    z-index: 1;
+}
+
+.home-mini-stat {
+    padding: 16px;
+    border-radius: 18px;
+    background: rgba(5, 5, 5, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.home-showcase {
+    border-radius: 28px;
+    overflow: hidden;
+    background: rgba(5, 5, 5, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.45),
+        0 0 55px rgba(13, 110, 253, 0.18);
+}
+
+.showcase-topbar {
+    display: flex;
+    gap: 8px;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.showcase-topbar span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.showcase-content {
+    padding: 24px;
+}
+
+.showcase-featured {
+    min-height: 260px;
+    display: flex;
+    align-items: end;
+    padding: 24px;
+    border-radius: 22px;
+    background:
+        linear-gradient(135deg, rgba(13, 110, 253, 0.35), rgba(139, 92, 246, 0.24)),
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.22), transparent 28%),
+        #20242a;
+}
+
+.showcase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.showcase-card {
+    padding: 18px;
+    text-align: center;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.showcase-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+}
+
+.home-feature-card {
+    padding: 28px;
+    border-radius: 24px;
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+        #050505;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+    transition: 0.22s ease;
+}
+
+.home-feature-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(13, 110, 253, 0.75);
+    box-shadow:
+        0 22px 55px rgba(0, 0, 0, 0.45),
+        0 0 35px rgba(13, 110, 253, 0.18);
+}
+
+.feature-icon {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    font-size: 1.8rem;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #0d6efd, #8b5cf6);
+    box-shadow: 0 14px 32px rgba(13, 110, 253, 0.28);
+}
+
+.home-cta {
+    background:
+        linear-gradient(135deg, rgba(13, 110, 253, 0.25), rgba(139, 92, 246, 0.25)),
+        rgba(5, 5, 5, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 768px) {
+    .showcase-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
         .sidebar-img {
     width: 28px;
     height: 28px;
