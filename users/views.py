@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from games.models import LibraryItem
 from .forms import RegisterForm, ProfileUpdateForm
 from .models import Profile
 
@@ -26,6 +27,7 @@ def register_view(request):
 @login_required
 def profile_view(request):
     profile, created = Profile.objects.get_or_create(user=request.user)
+    library_count = LibraryItem.objects.filter(user=request.user).count()
 
     if request.method == 'POST':
         form = ProfileUpdateForm(request.POST, request.FILES, instance=profile)
@@ -43,5 +45,6 @@ def profile_view(request):
         {
             'profile': profile,
             'form': form,
+            'library_count': library_count,
         }
     )
