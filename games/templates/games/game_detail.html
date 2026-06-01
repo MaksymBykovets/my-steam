@@ -49,19 +49,17 @@
         </p>
 
         <div class="d-flex gap-3 mt-4">
-            {% if user.is_authenticated %}
-                {% if is_in_library %}
-                    <a href="{% url 'library' %}" class="btn btn-success btn-lg px-4">In Library</a>
-                    <a href="{% url 'remove_from_library' game.pk %}" class="btn btn-outline-danger btn-lg px-4">Remove</a>
-                {% else %}
-                    <a href="{% url 'add_to_library' game.pk %}" class="btn btn-primary btn-lg px-4">Add to Library</a>
-                {% endif %}
-            {% else %}
-                <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4">Log in to Add</a>
-            {% endif %}
-
-            <a href="#" class="btn btn-outline-light btn-lg px-4">Add to Wishlist</a>
-        </div>
+    {% if user.is_authenticated %}
+        {% if is_in_library %}
+            <a href="{% url 'library' %}" class="btn btn-success btn-lg px-4">In Library</a>
+            <a href="{% url 'remove_from_library' game.pk %}" class="btn btn-outline-danger btn-lg px-4">Remove</a>
+        {% else %}
+            <a href="{% url 'add_to_library' game.pk %}" class="btn btn-primary btn-lg px-4">Add to Library</a>
+        {% endif %}
+    {% else %}
+        <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4">Log in to Add</a>
+    {% endif %}
+</div>
     </div>
 </div>
 {% endblock %}
