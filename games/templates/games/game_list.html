@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block title %}Store — My Steam{% endblock %}
 
 {% block content %}
 <div class="store-layout">
     <aside class="store-sidebar">
         <div class="sidebar-logo mb-4">
-            <div class="sidebar-icon">🎮</div>
+            <div class="sidebar-icon">
+            <img src="{% static 'images/icons/icon.png' %}" alt="My Steam" class="sidebar-img">
+            </div>
             <div>
                 <h5 class="mb-0 fw-bold">My Steam</h5>
                 <small class="text-secondary">Game Launcher</small>
@@ -15,22 +19,22 @@
 
         <nav class="sidebar-nav">
             <a href="{% url 'home' %}" class="sidebar-link">
-                <span>🏠</span>
+                <img src="{% static 'images/icons/home.png' %}" alt="Home" class="sidebar-link-icon">
                 <span>Home</span>
             </a>
 
             <a href="{% url 'game_list' %}" class="sidebar-link active">
-                <span>🛒</span>
+                <img src="{% static 'images/icons/store.png' %}" alt="Store" class="sidebar-link-icon">
                 <span>Store</span>
             </a>
 
             <a href="{% url 'library' %}" class="sidebar-link">
-                <span>📚</span>
+                <img src="{% static 'images/icons/library.png' %}" alt="Library" class="sidebar-link-icon">
                 <span>Library</span>
             </a>
 
             <a href="{% url 'profile' %}" class="sidebar-link">
-                <span>👤</span>
+                <img src="{% static 'images/icons/profile.png' %}" alt="Profile" class="sidebar-link-icon">
                 <span>Profile</span>
             </a>
         </nav>
