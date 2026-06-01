@@ -1,47 +1,116 @@
 {% extends 'base.html' %}
 
-{% block title %}Games — My Steam{% endblock %}
+{% block title %}Store — My Steam{% endblock %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h1 class="fw-bold mb-1">Store</h1>
-        <p class="text-secondary mb-0">Browse the latest games and add them to your library.</p>
-    </div>
-
-    <form class="d-flex" role="search">
-        <input class="form-control bg-black text-light border-secondary me-2" type="search" placeholder="Search games...">
-        <button class="btn btn-primary" type="submit">Search</button>
-    </form>
-</div>
-
-<div class="row g-4">
-    {% for game in games %}
-        <div class="col-md-6 col-lg-3">
-            <div class="card bg-black text-light border-secondary h-100 shadow">
-                <div class="ratio ratio-4x3 bg-secondary rounded-top overflow-hidden">
-    {% if game.cover_image %}
-        <img src="{{ game.cover_image.url }}" class="w-100 h-100 object-fit-cover" alt="{{ game.title }}">
-    {% else %}
-        <div class="d-flex align-items-center justify-content-center h-100">
-            <div class="text-center px-3">
-                <div class="display-5">🎮</div>
-                <div class="fw-bold mt-2">{{ game.title }}</div>
+<div class="store-layout">
+    <aside class="store-sidebar">
+        <div class="sidebar-logo mb-4">
+            <div class="sidebar-icon">🎮</div>
+            <div>
+                <h5 class="mb-0 fw-bold">My Steam</h5>
+                <small class="text-secondary">Game Launcher</small>
             </div>
         </div>
-    {% endif %}
-</div>
 
-                <div class="card-body">
-                    <span class="badge bg-primary mb-2">{{ game.genre }}</span>
-                    <h5 class="card-title">{{ game.title }}</h5>
-                    <p class="card-text text-secondary mb-2">{{ game.developer }}</p>
-                    <p class="fw-bold mb-3">${{ game.price }}</p>
+        <nav class="sidebar-nav">
+            <a href="{% url 'home' %}" class="sidebar-link">
+                <span>🏠</span>
+                <span>Home</span>
+            </a>
 
-                    <a href="{% url 'game_detail' game.pk %}" class="btn btn-outline-light w-100">View Details</a>
-                </div>
-            </div>
+            <a href="{% url 'game_list' %}" class="sidebar-link active">
+                <span>🛒</span>
+                <span>Store</span>
+            </a>
+
+            <a href="{% url 'library' %}" class="sidebar-link">
+                <span>📚</span>
+                <span>Library</span>
+            </a>
+
+            <a href="{% url 'profile' %}" class="sidebar-link">
+                <span>👤</span>
+                <span>Profile</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-divider"></div>
+
+        <div class="small text-secondary">
+            Browse, collect, and manage your games in one place.
         </div>
-    {% endfor %}
+    </aside>
+
+    <section class="store-main">
+        <div class="store-topbar mb-4">
+            <div>
+                <span class="badge bg-primary mb-2">Game Store</span>
+                <h1 class="display-5 fw-bold mb-1">Store</h1>
+                <p class="text-secondary mb-0">
+                    Discover games and build your personal library.
+                </p>
+            </div>
+
+            <form class="store-search" role="search">
+                <input class="form-control bg-black text-light border-secondary"
+                       type="search"
+                       placeholder="Search for a game...">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="store-filters mb-4">
+            <button class="filter-pill active">All Games</button>
+            <button class="filter-pill">Action</button>
+            <button class="filter-pill">RPG</button>
+            <button class="filter-pill">Racing</button>
+            <button class="filter-pill">Simulation</button>
+            <button class="filter-pill">Indie</button>
+        </div>
+
+        {% if games %}
+            <div class="row g-4">
+                {% for game in games %}
+                    <div class="col-md-6 col-xl-4 col-xxl-3">
+                        <div class="game-card h-100">
+                            <div class="game-cover">
+                                {% if game.cover_image %}
+                                    <img src="{{ game.cover_image.url }}"
+                                         class="w-100 h-100 object-fit-cover"
+                                         alt="{{ game.title }}">
+                                {% else %}
+                                    <div class="game-cover-placeholder">
+                                        <div class="display-5">🎮</div>
+                                        <div class="fw-bold mt-2">{{ game.title }}</div>
+                                    </div>
+                                {% endif %}
+
+                                <span class="game-badge">{{ game.genre }}</span>
+                            </div>
+
+                            <div class="game-card-body">
+                                <h5 class="game-title">{{ game.title }}</h5>
+                                <p class="game-developer">By {{ game.developer }}</p>
+
+                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                    <span class="game-price">${{ game.price }}</span>
+                                    <a href="{% url 'game_detail' game.pk %}" class="btn btn-outline-light btn-sm">
+                                        View Details
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="empty-store">
+                <div class="display-1 mb-3">🎮</div>
+                <h2 class="fw-bold">No games yet</h2>
+                <p class="text-secondary">Add games from the Django admin panel.</p>
+            </div>
+        {% endif %}
+    </section>
 </div>
 {% endblock %}
