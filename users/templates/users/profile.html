@@ -4,26 +4,57 @@
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-lg-7">
+    <div class="col-lg-8">
         <div class="card bg-black text-light border-secondary shadow">
             <div class="card-body p-4">
-                <h1 class="fw-bold mb-3">Profile</h1>
+                <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start gap-4">
+                    <div class="text-center">
+                        {% if profile.avatar %}
+                            <img src="{{ profile.avatar.url }}"
+                                 alt="{{ request.user.username }}"
+                                 class="rounded-circle border border-secondary object-fit-cover"
+                                 style="width: 150px; height: 150px;">
+                        {% else %}
+                            <div class="rounded-circle border border-secondary bg-secondary d-flex align-items-center justify-content-center"
+                                 style="width: 150px; height: 150px;">
+                                <span class="display-4">👤</span>
+                            </div>
+                        {% endif %}
 
-                <p class="text-secondary mb-4">
-                    Manage your account information.
-                </p>
+                        <h2 class="fw-bold mt-3 mb-0">{{ request.user.username }}</h2>
+                        <p class="text-secondary mb-0">{{ request.user.email }}</p>
+                    </div>
 
-                <div class="mb-3">
-                    <span class="text-secondary">Username:</span>
-                    <span class="fw-bold">{{ request.user.username }}</span>
+                    <div class="flex-grow-1 w-100">
+                        <h1 class="fw-bold mb-3">Profile Settings</h1>
+                        <p class="text-secondary">
+                            Update your avatar and personal information.
+                        </p>
+
+                        <form method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <div class="mb-3">
+                                <label class="form-label">Avatar</label>
+                                {{ form.avatar }}
+                                {% if form.avatar.errors %}
+                                    <div class="text-danger small mt-1">{{ form.avatar.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label">Bio</label>
+                                {{ form.bio }}
+                                {% if form.bio.errors %}
+                                    <div class="text-danger small mt-1">{{ form.bio.errors }}</div>
+                                {% endif %}
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                            <a href="{% url 'game_list' %}" class="btn btn-outline-light ms-2">Browse Games</a>
+                        </form>
+                    </div>
                 </div>
-
-                <div class="mb-3">
-                    <span class="text-secondary">Email:</span>
-                    <span class="fw-bold">{{ request.user.email }}</span>
-                </div>
-
-                <a href="{% url 'game_list' %}" class="btn btn-primary mt-3">Browse Games</a>
             </div>
         </div>
     </div>
