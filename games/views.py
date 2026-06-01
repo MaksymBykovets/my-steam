@@ -8,7 +8,38 @@ from .models import Game, LibraryItem
 def game_list(request):
     games = Game.objects.all().order_by('-created_at')
 
-    return render(request, 'games/game_list.html', {'games': games})
+    search_query = request.GET.get('q', '')
+    genre_query = request.GET.get('genre', '')
+    sort_query = request.GET.get('sort', '')
+
+    if search_query:
+        games = games.filter(title__icontains=search_query)
+
+    if genre_query:
+        games = games.filter(genre__iexact=genre_query)
+
+    if sort_query == 'price_low':
+        games = games.order_by('price')
+    elif sort_query == 'price_high':
+        games = games.order_by('-price')
+    elif sort_query == 'newest':
+        games = games.order_by('-release_date')
+    elif sort_query == 'title':
+        games = games.order_by('title')
+
+    genres = Game.objects.values_list('genre', flat=True).distinct().order_by('genre')
+
+    return render(
+        request,
+        'games/game_list.html',
+        {
+            'games': games,
+            'genres': genres,
+            'search_query': search_query,
+            'genre_query': genre_query,
+            'sort_query': sort_query,
+        }
+    )
 
 
 def game_detail(request, pk):

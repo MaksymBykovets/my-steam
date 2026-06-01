@@ -38,7 +38,7 @@
         <div class="sidebar-divider"></div>
 
         <div class="small text-secondary">
-            Browse, collect, and manage your games in one place.
+            Use search, genre filters, and sorting to find games faster.
         </div>
     </aside>
 
@@ -52,22 +52,98 @@
                 </p>
             </div>
 
-            <form class="store-search" role="search">
+            <form class="store-search" method="get" action="{% url 'game_list' %}">
                 <input class="form-control bg-black text-light border-secondary"
                        type="search"
+                       name="q"
+                       value="{{ search_query }}"
                        placeholder="Search for a game...">
+
+                {% if genre_query %}
+                    <input type="hidden" name="genre" value="{{ genre_query }}">
+                {% endif %}
+
+                {% if sort_query %}
+                    <input type="hidden" name="sort" value="{{ sort_query }}">
+                {% endif %}
+
                 <button class="btn btn-primary" type="submit">Search</button>
             </form>
         </div>
 
+        <form method="get" action="{% url 'game_list' %}" class="advanced-filters mb-4">
+            <div class="row g-3 align-items-end">
+                <div class="col-lg-5">
+                    <label class="form-label text-secondary">Search</label>
+                    <input class="form-control bg-black text-light border-secondary"
+                           type="search"
+                           name="q"
+                           value="{{ search_query }}"
+                           placeholder="Game title...">
+                </div>
+
+                <div class="col-lg-3">
+                    <label class="form-label text-secondary">Genre</label>
+                    <select name="genre" class="form-select bg-black text-light border-secondary">
+                        <option value="">All Genres</option>
+                        {% for genre in genres %}
+                            <option value="{{ genre }}" {% if genre_query == genre %}selected{% endif %}>
+                                {{ genre }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="col-lg-3">
+                    <label class="form-label text-secondary">Sort By</label>
+                    <select name="sort" class="form-select bg-black text-light border-secondary">
+                        <option value="">Default</option>
+                        <option value="price_low" {% if sort_query == 'price_low' %}selected{% endif %}>
+                            Price: Low to High
+                        </option>
+                        <option value="price_high" {% if sort_query == 'price_high' %}selected{% endif %}>
+                            Price: High to Low
+                        </option>
+                        <option value="newest" {% if sort_query == 'newest' %}selected{% endif %}>
+                            Release Date: Newest
+                        </option>
+                        <option value="title" {% if sort_query == 'title' %}selected{% endif %}>
+                            Title: A to Z
+                        </option>
+                    </select>
+                </div>
+
+                <div class="col-lg-1 d-grid">
+                    <button type="submit" class="btn btn-primary">Apply</button>
+                </div>
+            </div>
+        </form>
+
         <div class="store-filters mb-4">
-            <button class="filter-pill active">All Games</button>
-            <button class="filter-pill">Action</button>
-            <button class="filter-pill">RPG</button>
-            <button class="filter-pill">Racing</button>
-            <button class="filter-pill">Simulation</button>
-            <button class="filter-pill">Indie</button>
+            <a href="{% url 'game_list' %}"
+               class="filter-pill text-decoration-none {% if not genre_query %}active{% endif %}">
+                All Games
+            </a>
+
+            {% for genre in genres %}
+                <a href="?genre={{ genre }}{% if search_query %}&q={{ search_query }}{% endif %}{% if sort_query %}&sort={{ sort_query }}{% endif %}"
+                   class="filter-pill text-decoration-none {% if genre_query == genre %}active{% endif %}">
+                    {{ genre }}
+                </a>
+            {% endfor %}
         </div>
+
+        {% if search_query or genre_query or sort_query %}
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <p class="text-secondary mb-0">
+                    Showing {{ games|length }} result{% if games|length != 1 %}s{% endif %}
+                </p>
+
+                <a href="{% url 'game_list' %}" class="btn btn-outline-light btn-sm">
+                    Clear Filters
+                </a>
+            </div>
+        {% endif %}
 
         {% if games %}
             <div class="row g-4">
@@ -106,9 +182,14 @@
             </div>
         {% else %}
             <div class="empty-store">
-                <div class="display-1 mb-3">🎮</div>
-                <h2 class="fw-bold">No games yet</h2>
-                <p class="text-secondary">Add games from the Django admin panel.</p>
+                <div class="display-1 mb-3">🔎</div>
+                <h2 class="fw-bold">No games found</h2>
+                <p class="text-secondary">
+                    Try changing your search or filters.
+                </p>
+                <a href="{% url 'game_list' %}" class="btn btn-primary mt-3">
+                    Reset Store
+                </a>
             </div>
         {% endif %}
     </section>
